@@ -27,12 +27,7 @@ Clock::Clock(DisplayApp* app,
   displayedChar[2] = 0;
   displayedChar[3] = 0;
   displayedChar[4] = 0;
-
-  //test
-  lv_obj_t * label_test = lv_label_create(lv_scr_act(), NULL); 
-  lv_label_set_text(label_test, Symbols::game);                                           
-  lv_obj_set_pos(label_test, 15, 15);
-                                             
+                                          
   batteryIcon = lv_label_create(lv_scr_act(), NULL);
   lv_label_set_text(batteryIcon, Symbols::batteryFull);
   lv_obj_align(batteryIcon, lv_scr_act(), LV_ALIGN_IN_TOP_RIGHT, -5, 2);
