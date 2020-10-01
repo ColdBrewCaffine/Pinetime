@@ -31,7 +31,7 @@ Clock::Clock(DisplayApp* app,
   //test
   lv_obj_t * label_test = lv_label_create(lv_scr_act(), NULL); 
   lv_label_set_text(label_test, Symbols::game);                                           
-  lv_obj_set_pos(label_test, 10, 10);
+  lv_obj_set_pos(label_test, 15, 15);
                                              
   batteryIcon = lv_label_create(lv_scr_act(), NULL);
   lv_label_set_text(batteryIcon, Symbols::batteryFull);
