@@ -29,7 +29,7 @@ Clock::Clock(DisplayApp* app,
   displayedChar[4] = 0;
 
   //test
-  label_test = lv_label_create(lv_scr_act(), NULL); 
+  lv_obj_t * label_test = lv_label_create(lv_scr_act(), NULL); 
   lv_label_set_text(label_test, Symbols::game);                                           
   lv_obj_set_pos(label_test, 10, 10);
                                              
