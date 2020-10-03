@@ -12,6 +12,18 @@ extern lv_font_t jetbrains_mono_bold_20;
 lv_obj_t *img_src_1;
 lv_obj_t *img_src_2;
 
+uint16_t x1 = 0;
+uint16_t y1 = 90;
+
+uint16_t x2 = 0;
+uint16_t y2 = 150;
+
+int pos_x = 120;
+int pos_y = 120;
+
+int dx = 3;
+int dy = 2;
+
 InfiniRun::InfiniRun(Pinetime::Applications::DisplayApp *app, Pinetime::Components::LittleVgl& lvgl) : Screen(app){
   app->SetTouchMode(DisplayApp::TouchModes::Polling);
   
@@ -41,6 +53,21 @@ InfiniRun::~InfiniRun() {
 }
 
 bool InfiniRun::Refresh() {
+  
+  lv_obj_set_pos(img_src_2, pos_x + dx, pos_y + dy);
+  if(pos_y <= 0 || pos_y >= 228){
+    dy *= -1;
+    
+  if(pos_x >= 228){
+    dx *= -1; 
+  if(pos_x <= 20 && pos_y >=y1 && pos_y <=y2){
+    dx *= -1;          
+  }
+  else if(pos_x <= -40){
+  pos_x = 120;
+  pos_y = 120 ; 
+  }  
+          
   return running;
 }
 
@@ -50,14 +77,17 @@ bool InfiniRun::OnButtonPushed() {
 }
 
 bool InfiniRun::OnTouchEvent(Pinetime::Applications::TouchEvents event) { 
-   
-  lv_obj_set_pos(img_src_1, 0, 60);  
+  lv_obj_set_pos(img_src_1, x1, y1);
+  lv_obj_set_pos(img_src_2, pos_x - 12, pos_y - 12);
   return true; 
 }
 
 bool InfiniRun::OnTouchEvent(uint16_t x, uint16_t y) {
  
   lv_obj_set_pos(img_src_1, 0, y - 30);
+  y1 = y - 30;
+  y2 = y + 30;
+  
  // lvgl.SetFullRefresh(Components::LittleVgl::FullRefreshDirections::None);
  // lvgl.FlushDisplay(&area, b);
   return true;
