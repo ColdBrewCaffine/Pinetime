@@ -41,7 +41,7 @@ bool InfiniRun::OnTouchEvent(Pinetime::Applications::TouchEvents event) {
   return true;
 }
 
-//image
+//image data
 static lv_img_dsc_t bitmap; 
 
 const uint8_t bitmap_map[] = {
