@@ -12,11 +12,11 @@ extern lv_font_t jetbrains_mono_bold_20;
 lv_obj_t *img_src_1;
 lv_obj_t *img_src_2;
 
-int x1 = 0;
-int y1 = 90;
+int x_1 = 0;
+int y_1 = 90;
 
-int x2 = 0;
-int y2 = 150;
+int x_2 = 0;
+int y_2 = 150;
 
 int pos_x = 120;
 int pos_y = 120;
@@ -64,7 +64,7 @@ bool InfiniRun::Refresh() {
     dx *= -1; 
   }
   
-  if(pos_x <= 20 && pos_y >= y1 && pos_y <= y2){
+  if(pos_x <= 20 && pos_y >= y_1 && pos_y <= y_2){
     dx *= -1;          
   }
   
@@ -90,8 +90,8 @@ bool InfiniRun::OnTouchEvent(Pinetime::Applications::TouchEvents event) {
 bool InfiniRun::OnTouchEvent(uint16_t x, uint16_t y) {
  
   lv_obj_set_pos(img_src_1, 0, y - 30);
-  y1 = y - 30;
-  y2 = y + 30;
+  y_1 = y - 30;
+  y_2 = y + 30;
   
  // lvgl.SetFullRefresh(Components::LittleVgl::FullRefreshDirections::None);
  // lvgl.FlushDisplay(&area, b);
