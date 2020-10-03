@@ -57,7 +57,7 @@ bool InfiniRun::OnTouchEvent(Pinetime::Applications::TouchEvents event) {
 
 bool InfiniRun::OnTouchEvent(uint16_t x, uint16_t y) {
  
-  lv_obj_set_pos(img_src, 0, y - 30);
+  lv_obj_set_pos(img_src_1, 0, y - 30);
  // lvgl.SetFullRefresh(Components::LittleVgl::FullRefreshDirections::None);
  // lvgl.FlushDisplay(&area, b);
   return true;
