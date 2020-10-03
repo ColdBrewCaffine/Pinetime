@@ -20,7 +20,7 @@ namespace Pinetime {
           bool Refresh() override;
           bool OnButtonPushed() override;
           bool OnTouchEvent(TouchEvents event) override;
-        
+          bool running = true;
       };
     }
   }
