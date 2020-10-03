@@ -51,7 +51,7 @@ bool InfiniRun::OnButtonPushed() {
 
 bool InfiniRun::OnTouchEvent(Pinetime::Applications::TouchEvents event) { 
    
-  lv_obj_set_pos(img_src_1, 0, 0);  
+  lv_obj_set_pos(img_src_1, 0, 60);  
   return true; 
 }
 
