@@ -12,11 +12,11 @@ extern lv_font_t jetbrains_mono_bold_20;
 lv_obj_t *img_src_1;
 lv_obj_t *img_src_2;
 
-uint16_t x1 = 0;
-uint16_t y1 = 90;
+int x1 = 0;
+int y1 = 90;
 
-uint16_t x2 = 0;
-uint16_t y2 = 150;
+int x2 = 0;
+int y2 = 150;
 
 int pos_x = 120;
 int pos_y = 120;
@@ -55,17 +55,22 @@ InfiniRun::~InfiniRun() {
 bool InfiniRun::Refresh() {
   
   lv_obj_set_pos(img_src_2, pos_x + dx, pos_y + dy);
+  
   if(pos_y <= 0 || pos_y >= 228){
     dy *= -1;
-    
+  }
+  
   if(pos_x >= 228){
     dx *= -1; 
-  if(pos_x <= 20 && pos_y >=y1 && pos_y <=y2){
+  }
+  
+  if(pos_x <= 20 && pos_y >= y1 && pos_y <= y2){
     dx *= -1;          
   }
+  
   else if(pos_x <= -40){
   pos_x = 120;
-  pos_y = 120 ; 
+  pos_y = 120; 
   }  
           
   return running;
