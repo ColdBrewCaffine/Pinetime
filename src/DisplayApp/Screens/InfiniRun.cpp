@@ -58,27 +58,26 @@ bool InfiniRun::Refresh() {
   
   if((counter++ % 5) == 0){
 
-  counter = 0;	
+    counter = 0;	
 	  
-  lv_obj_set_pos(img_src_2, pos_x + dx, pos_y + dy);
+    lv_obj_set_pos(img_src_2, pos_x + dx, pos_y + dy);
   
-  if(pos_y <= 0 || pos_y >= 228){
-    dy *= -1;
-  }
+    if(pos_y <= 0 || pos_y >= 228){
+      dy *= -1;
+    }
   
-  if(pos_x >= 228){
-    dx *= -1; 
-  }
+    if(pos_x >= 228){
+      dx *= -1; 
+    }
   
-  if(pos_x <= 20 && pos_y >= y_1 && pos_y <= y_2){
-    dx *= -1;          
-  }
+    if(pos_x <= 20 && pos_y >= y_1 && pos_y <= y_2){
+      dx *= -1;          
+    }
   
-  else if(pos_x <= -40){
-  pos_x = 120;
-  pos_y = 120; 
-  }
-  
+    else if(pos_x <= -40){
+      pos_x = 120;
+      pos_y = 120; 
+    } 
   }      
   return running;
 }
