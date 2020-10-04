@@ -61,8 +61,8 @@ bool InfiniRun::Refresh() {
 
     counter = 0;	
     
-    pos_x += dx
-    pos_y += dy	    
+    pos_x += dx;
+    pos_y += dy;	    
 	  
     lv_obj_set_pos(img_src_2, pos_x, pos_y);
   
