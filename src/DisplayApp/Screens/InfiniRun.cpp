@@ -19,8 +19,8 @@ int y_1 = 90;
 int x_2 = 0;
 int y_2 = 150;
 
-int pos_x = 120;
-int pos_y = 120;
+int pos_x = 108;
+int pos_y = 108;
 
 int dx = 3;
 int dy = 2;
@@ -66,21 +66,25 @@ bool InfiniRun::Refresh() {
 	  
     lv_obj_set_pos(img_src_2, pos_x, pos_y);
   
-    if(pos_y <= 0 || pos_y >= 228){
+    //checks if it has touched the sides (floor and ceiling)	  
+    if(pos_y <= 0 || pos_y >= 216){
       dy *= -1;
     }
   
-    if(pos_x >= 228){
+    //checks if it has touched the side (left side)  
+    if(pos_x >= 216){
       dx *= -1; 
     }
   
-    if(pos_x <= 20 && pos_y >= y_1 && pos_y <= y_2){
+    //checks if it is in the position of the paddle	  
+    if(pos_x <= 4 && pos_y >= y_1 && pos_y <= y_2){
       dx *= -1;          
     }
-  
+	  
+    //checks if it has gone behind the paddle
     else if(pos_x <= -40){
-      pos_x = 120;
-      pos_y = 120; 
+      pos_x = 108;
+      pos_y = 108; 
     } 
   }      
   return running;
