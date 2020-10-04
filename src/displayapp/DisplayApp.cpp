@@ -19,6 +19,7 @@
 #include "displayapp/screens/ApplicationList.h"
 #include "displayapp/screens/FirmwareValidation.h"
 #include "displayapp/screens/InfiniPaint.h"
+#include "displayapp/screens/InfiniRun.h"
 #include "systemtask/SystemTask.h"
 
 using namespace Pinetime::Applications;
