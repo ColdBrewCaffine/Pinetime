@@ -1,13 +1,13 @@
 #include <cstdio>
 #include <libs/date/includes/date/date.h>
-#include <Components/DateTime/DateTimeController.h>
+#include "Components/DateTime/DateTimeController.h"
 #include <Version.h>
 #include <libs/lvgl/src/lv_core/lv_obj.h>
 #include <libs/lvgl/src/lv_font/lv_font.h>
 #include <libs/lvgl/lvgl.h>
 #include <libraries/log/nrf_log.h>
 #include "Tab.h"
-#include <DisplayApp/DisplayApp.h>
+#include "DisplayApp/DisplayApp.h"
 
 
 using namespace Pinetime::Applications::Screens;
