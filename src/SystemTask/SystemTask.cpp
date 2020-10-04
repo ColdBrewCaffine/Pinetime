@@ -11,7 +11,7 @@
 #include <host/ble_gap.h>
 #include <host/util/util.h>
 #include <drivers/InternalFlash.h>
-#include "../main.h"
+#include "main.h"
 #include "Components/Ble/NimbleController.h"
 
 using namespace Pinetime::System;
@@ -191,6 +191,8 @@ void SystemTask::Work() {
     if(!nrf_gpio_pin_read(pinButton))
       watchdog.Kick();
   }
+  // Clear diagnostic suppression
+  #pragma clang diagnostic pop
 }
 
 void SystemTask::OnButtonPushed() {
