@@ -330,6 +330,7 @@ list(APPEND SOURCE_FILES
         displayapp/screens/Meter.cpp
         displayapp/screens/Gauge.cpp
         displayapp/screens/InfiniPaint.cpp
+        displayapp/screens/InfiniRun.cpp
         displayapp/screens/DropDownDemo.cpp
         displayapp/screens/Modal.cpp
         displayapp/screens/BatteryIcon.cpp
@@ -407,6 +408,7 @@ set(INCLUDE_FILES
         displayapp/screens/Meter.h
         displayapp/screens/Gauge.h
         displayapp/screens/InfiniPaint.h
+        displayapp/screens/InfiniRun.h
         displayapp/screens/DropDownDemo.h
         displayapp/screens/Modal.h
         displayapp/screens/BatteryIcon.h
