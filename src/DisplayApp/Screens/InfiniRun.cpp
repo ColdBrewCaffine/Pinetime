@@ -1,3 +1,4 @@
+
 #include <libs/lvgl/lvgl.h>
 #include <libraries/log/nrf_log.h>
 #include "InfiniRun.h"
@@ -57,11 +58,32 @@ InfiniRun::~InfiniRun() {
 bool InfiniRun::Refresh() {
   
   if((counter++ % 5) == 0){
-    counter = 0;		  
-    lv_obj_set_pos(img_src_2, pos_x + dx, pos_y + dy);
-  }
-	
-  return running;	
+
+    counter = 0;	
+    
+    pos_x += dx
+    pos_y += dy	    
+	  
+    lv_obj_set_pos(img_src_2, pos_x, pos_y);
+  
+    if(pos_y <= 0 || pos_y >= 228){
+      dy *= -1;
+    }
+  
+    if(pos_x >= 228){
+      dx *= -1; 
+    }
+  
+    if(pos_x <= 20 && pos_y >= y_1 && pos_y <= y_2){
+      dx *= -1;          
+    }
+  
+    else if(pos_x <= -40){
+      pos_x = 120;
+      pos_y = 120; 
+    } 
+  }      
+  return running;
 }
 
 bool InfiniRun::OnButtonPushed() {
@@ -78,7 +100,8 @@ bool InfiniRun::OnTouchEvent(uint16_t x, uint16_t y) {
   lv_obj_set_pos(img_src_1, 0, y - 30);
   y_1 = y - 30;
   y_2 = y + 30;
- 
+  
+ // lvgl.SetFullRefresh(Components::LittleVgl::FullRefreshDirections::None);
+ // lvgl.FlushDisplay(&area, b);
   return true;
 }
-
