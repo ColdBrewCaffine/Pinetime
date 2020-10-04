@@ -102,7 +102,7 @@ void SystemTask::Work() {
 
   while(true) {
     uint8_t msg;
-    if (xQueueReceive(systemTasksMsgQueue, &msg, isSleeping?2500 : 1000)) {
+    if (xQueueReceive(systemTasksMsgQueue, &msg, isSleeping ? 2500 : 1000)) {
       Messages message = static_cast<Messages >(msg);
       switch(message) {
         case Messages::GoToRunning:
