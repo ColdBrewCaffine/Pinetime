@@ -24,6 +24,11 @@ int pos_y = 120;
 int dx = 3;
 int dy = 2;
 
+void delay()
+{
+	for(uint32_t i=0; i<64000; i++);
+}
+
 InfiniRun::InfiniRun(Pinetime::Applications::DisplayApp *app, Pinetime::Components::LittleVgl& lvgl) : Screen(app){
   app->SetTouchMode(DisplayApp::TouchModes::Polling);
   
@@ -71,8 +76,9 @@ bool InfiniRun::Refresh() {
   else if(pos_x <= -40){
   pos_x = 120;
   pos_y = 120; 
-  }  
-          
+  }
+  
+  delay();      
   return running;
 }
 
