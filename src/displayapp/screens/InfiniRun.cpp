@@ -9,22 +9,22 @@ extern lv_font_t jetbrains_mono_bold_20;
 
 //extern static lv_img_dsc_t bitmap; 
 
-lv_obj_t *img_src_1;
-lv_obj_t *img_src_2;
+lv_obj_t *img_src_1;		// pointer to paddle image
+lv_obj_t *img_src_2;		// pointer to ball image
 
 int x_1 = 0;
-int y_1 = 90;
+int y_1 = 90;		// bottom extreme of the paddle
 
 int x_2 = 0;
-int y_2 = 150;
+int y_2 = 150;		//top extreme of the paddle
 
-int pos_x = 108;
-int pos_y = 108;
+int pos_x = 108;	// Initial x_coordinate for the ball (12px offset from the center to counteract the ball's 24px size)
+int pos_y = 108;	// Initial y_coordinate for the ball
 
-int dx = 3;
-int dy = 2;
+int dx = 3;		// Velocity of the ball in the x_coordinate
+int dy = 2;		// Velocity of the ball in the y_coordinate
 
-int counter = 0;
+int counter = 0;	// init Frame refresh limit counter
 
 InfiniRun::InfiniRun(Pinetime::Applications::DisplayApp *app, Pinetime::Components::LittleVgl& lvgl) : Screen(app){
   app->SetTouchMode(DisplayApp::TouchModes::Polling);
@@ -94,15 +94,17 @@ bool InfiniRun::OnButtonPushed() {
   return true;
 }
 
+/*
 bool InfiniRun::OnTouchEvent(Pinetime::Applications::TouchEvents event) { 
   return true; 
 }
+*/
 
 bool InfiniRun::OnTouchEvent(uint16_t x, uint16_t y) {
  
-  lv_obj_set_pos(img_src_1, 0, y - 30);
-  y_1 = y - 30;
-  y_2 = y + 30;
+  lv_obj_set_pos(img_src_1, 0, y - 30);		// sets the center paddle pos. (30px offset) with the the y_coordinate of the finger and defaults the x_coordinate to 0
+  y_1 = y - 30;					// refreshes the upper extreme of the paddle
+  y_2 = y + 30;					// refreshes the upper extreme of the paddle
   
  // lvgl.SetFullRefresh(Components::LittleVgl::FullRefreshDirections::None);
  // lvgl.FlushDisplay(&area, b);
