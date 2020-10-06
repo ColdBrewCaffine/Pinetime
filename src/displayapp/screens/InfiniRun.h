@@ -19,9 +19,10 @@ namespace Pinetime {
 
           bool Refresh() override;
           bool OnButtonPushed() override;
-//        bool OnTouchEvent(TouchEvents event) override;
+          bool OnTouchEvent(TouchEvents event) override;
           bool OnTouchEvent(uint16_t x, uint16_t y) override;
           bool running = true;
+          lv_obj_t* points;
       };
     }
   }
