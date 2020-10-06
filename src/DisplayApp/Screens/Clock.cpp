@@ -17,6 +17,14 @@ static void event_handler(lv_obj_t * obj, lv_event_t event) {
 //  screen->OnObjectEvent(obj, event);
 }
 
+int pos_x = 108;	// Initial x_coordinate for the ball (12px offset from the center to counteract the ball's 24px size)
+int pos_y = 108;	// Initial y_coordinate for the ball
+
+int dx = 8;		// Velocity of the ball in the x_coordinate
+int dy = 7;		// Velocity of the ball in the y_coordinate
+
+int counter = 0;	// init Frame refresh limit counter
+
 static lv_img_dsc_t bitmap; 
 
 const uint8_t bitmap_map[] = {
@@ -70,7 +78,6 @@ Clock::Clock(DisplayApp* app,
   bitmap.data = bitmap_map;
   lv_obj_t *img_src = lv_img_create(lv_scr_act(), NULL);  
   lv_img_set_src(img_src, &bitmap);  
-  lv_obj_set_pos(img_src, 108, 108);                                           
 }
 
 Clock::~Clock() {
@@ -78,6 +85,27 @@ Clock::~Clock() {
 }
 
 bool Clock::Refresh() {
+  
+  if((counter++ % 5) == 0){
+
+    counter = 0;	
+    
+    pos_x += dx;
+    pos_y += dy;	    
+	  
+    lv_obj_set_pos(img_src, pos_x, pos_y);
+  
+    //checks if it has touched the sides (floor and ceiling)	  
+    if(pos_y <= 0 || pos_y >= 216){
+      dy *= -1;
+    }
+  
+    //checks if it has touched the side (left and right)  
+    if(pos_x <= 0 || pos_x >= 216){
+      dx *= -1; 
+    }  
+  }      
+  
 return true;
 }
 
