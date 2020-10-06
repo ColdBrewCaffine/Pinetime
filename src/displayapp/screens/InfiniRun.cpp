@@ -7,7 +7,6 @@ using namespace Pinetime::Applications::Screens;
 extern lv_font_t jetbrains_mono_extrabold_compressed;
 extern lv_font_t jetbrains_mono_bold_20;
 
-//extern static lv_img_dsc_t bitmap; 
 
 lv_obj_t *img_src_1;		// pointer to paddle image
 lv_obj_t *img_src_2;		// pointer to ball image
@@ -94,11 +93,10 @@ bool InfiniRun::OnButtonPushed() {
   return true;
 }
 
-/*
+
 bool InfiniRun::OnTouchEvent(Pinetime::Applications::TouchEvents event) { 
   return true; 
 }
-*/
 
 bool InfiniRun::OnTouchEvent(uint16_t x, uint16_t y) {
  
