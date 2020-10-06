@@ -25,9 +25,17 @@ int dy = 2;		// Velocity of the ball in the y_coordinate
 
 int counter = 0;	// init Frame refresh limit counter
 
+int score = 0;
+
+char Val[10];
+
 InfiniRun::InfiniRun(Pinetime::Applications::DisplayApp *app, Pinetime::Components::LittleVgl& lvgl) : Screen(app){
   app->SetTouchMode(DisplayApp::TouchModes::Polling);
-  
+	
+  points = lv_label_create(lv_scr_act(), NULL);
+  lv_label_set_text(points, "0");
+  lv_obj_align(points, lv_scr_act(), LV_ALIGN_IN_TOP_MID, 0, 0);
+	
   paddle.header.always_zero = 0;
   paddle.header.w = 4;
   paddle.header.h = 60;
@@ -76,14 +84,18 @@ bool InfiniRun::Refresh() {
   
     //checks if it is in the position of the paddle	  
     if(pos_x <= 4 && pos_y >= y_1 && pos_y <= y_2){
-      dx *= -1;          
+      dx *= -1;   
+      score++;
     }
 	  
     //checks if it has gone behind the paddle
     else if(pos_x <= -40){
       pos_x = 108;
       pos_y = 108; 
+      score = 0;	    
     } 
+    sprintf(Val, "%d", score);	
+    lv_label_set_text(points, Val);	  
   }      
   return running;
 }
