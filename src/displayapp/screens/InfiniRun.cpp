@@ -83,7 +83,7 @@ bool InfiniRun::Refresh() {
     }
   
     //checks if it is in the position of the paddle	  
-    if(pos_x <= 4 && pos_y >= y_1 && pos_y <= y_2){
+    if(pos_x >= 0 && pos_x <= 4 && pos_y >= y_1 && pos_y <= y_2){
       dx *= -1;   
       score++;
     }
