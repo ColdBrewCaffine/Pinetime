@@ -870,8 +870,8 @@ Clock::~Clock() {
 
 bool Clock::Refresh() {
 
-  if((Rfresh++ % 5) == 0){	
-	  
+  if((Rfresh++ % 2) == 0){	
+  Rfresh = 0;	  
   counter++;    
 
   if(counter==4){
