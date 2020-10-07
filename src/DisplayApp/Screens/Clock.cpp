@@ -871,32 +871,26 @@ bool Clock::Refresh() {
   counter++;    
 
   if(counter==4){
-	lv_obj_clean(lv_scr_act());  
 	lv_obj_set_pos(img_4, 90, 90);
   }
 
-  else if(counter==8){
-	lv_obj_clean(lv_scr_act());  
+  else if(counter==8){  
 	lv_obj_set_pos(img_8, 90, 90);
   }
 
   else if(counter==12){
-    lv_obj_clean(lv_scr_act());	  
 	lv_obj_set_pos(img_12, 90, 90);
   } 
 
   else if(counter==16){
-	lv_obj_clean(lv_scr_act());
 	lv_obj_set_pos(img_16, 90, 90);
   }
 
   else if(counter==20){
-	lv_obj_clean(lv_scr_act());
 	lv_obj_set_pos(img_20, 90, 90);
   }
 
   else if(counter==24){
-	lv_obj_clean(lv_scr_act());
 	lv_obj_set_pos(img_24, 90, 90);
     counter = 0; 
   }
