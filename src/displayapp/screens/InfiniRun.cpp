@@ -84,7 +84,7 @@ bool InfiniRun::Refresh() {
     }
   
     //checks if it is in the position of the paddle	  
-    if(pos_y >= y_1 && pos_y <= y_2){ 
+    if(pos_y >= (y_1 + 12) && pos_y <= (y_2 - 12)){ 
       if(pos_x >= 0 && pos_x < 4){    
           lv_obj_set_pos(img_src_2, 5, pos_y);
           dx *= -1;   
