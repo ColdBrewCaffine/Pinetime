@@ -12,7 +12,7 @@ TwiMaster::TwiMaster(const Modules module, const Parameters& params) : module{mo
   mutex = xSemaphoreCreateBinary();
 }
 
-static int twimaddress ;
+NRF_TWIM_Type* twimaddress;
 void TwiMaster::Init() {
   NRF_GPIO->PIN_CNF[params.pinScl] = ((uint32_t)GPIO_PIN_CNF_DIR_Input      << GPIO_PIN_CNF_DIR_Pos)
                                      | ((uint32_t)GPIO_PIN_CNF_INPUT_Connect    << GPIO_PIN_CNF_INPUT_Pos)
