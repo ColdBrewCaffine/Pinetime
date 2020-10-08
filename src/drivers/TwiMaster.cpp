@@ -12,6 +12,7 @@ TwiMaster::TwiMaster(const Modules module, const Parameters& params) : module{mo
   mutex = xSemaphoreCreateBinary();
 }
 
+static int twimaddress ;
 void TwiMaster::Init() {
   NRF_GPIO->PIN_CNF[params.pinScl] = ((uint32_t)GPIO_PIN_CNF_DIR_Input      << GPIO_PIN_CNF_DIR_Pos)
                                      | ((uint32_t)GPIO_PIN_CNF_INPUT_Connect    << GPIO_PIN_CNF_INPUT_Pos)
@@ -58,6 +59,28 @@ void TwiMaster::Init() {
 
   xSemaphoreGive(mutex);
 
+  twimaddress = twiBaseAddress;
+}
+
+// fix i2c when it gets stuck
+void i2c_fix() {
+    // disable i2c
+    uint32_t twi_state = NRF_TWI1->ENABLE;
+    twimaddress->ENABLE = TWIM_ENABLE_ENABLE_Disabled << TWI_ENABLE_ENABLE_Pos;
+
+    NRF_GPIO->PIN_CNF[7] = ((uint32_t)GPIO_PIN_CNF_DIR_Input      << GPIO_PIN_CNF_DIR_Pos)
+        | ((uint32_t)GPIO_PIN_CNF_INPUT_Connect    << GPIO_PIN_CNF_INPUT_Pos)
+        | ((uint32_t)GPIO_PIN_CNF_PULL_Pullup      << GPIO_PIN_CNF_PULL_Pos)
+        | ((uint32_t)GPIO_PIN_CNF_DRIVE_S0S1       << GPIO_PIN_CNF_DRIVE_Pos)
+        | ((uint32_t)GPIO_PIN_CNF_SENSE_Disabled   << GPIO_PIN_CNF_SENSE_Pos);
+
+    NRF_GPIO->PIN_CNF[6] = ((uint32_t)GPIO_PIN_CNF_DIR_Input        << GPIO_PIN_CNF_DIR_Pos)
+        | ((uint32_t)GPIO_PIN_CNF_INPUT_Connect    << GPIO_PIN_CNF_INPUT_Pos)
+        | ((uint32_t)GPIO_PIN_CNF_PULL_Pullup      << GPIO_PIN_CNF_PULL_Pos)
+        | ((uint32_t)GPIO_PIN_CNF_DRIVE_S0S1       << GPIO_PIN_CNF_DRIVE_Pos)
+        | ((uint32_t)GPIO_PIN_CNF_SENSE_Disabled   << GPIO_PIN_CNF_SENSE_Pos);
+
+    twimaddress->ENABLE = twi_state;
 }
 
 void TwiMaster::Read(uint8_t deviceAddress, uint8_t registerAddress, uint8_t *data, size_t size) {
@@ -88,7 +111,14 @@ void TwiMaster::Read(uint8_t deviceAddress, uint8_t *buffer, size_t size, bool s
   while(!twiBaseAddress->EVENTS_RXSTARTED && !twiBaseAddress->EVENTS_ERROR);
   twiBaseAddress->EVENTS_RXSTARTED = 0x0UL;
 
-  while(!twiBaseAddress->EVENTS_LASTRX && !twiBaseAddress->EVENTS_ERROR);
+  while(!twiBaseAddress->EVENTS_LASTRX && !twiBaseAddress->EVENTS_ERROR) {
+    static int counter = 0;
+    counter++;
+    if (counter > 5000) {
+        i2c_fix();
+        return;
+    }
+  }
   twiBaseAddress->EVENTS_LASTRX = 0x0UL;
 
   if (stop || twiBaseAddress->EVENTS_ERROR) {
@@ -118,7 +148,14 @@ void TwiMaster::Write(uint8_t deviceAddress, const uint8_t *data, size_t size, b
   while(!twiBaseAddress->EVENTS_TXSTARTED && !twiBaseAddress->EVENTS_ERROR);
   twiBaseAddress->EVENTS_TXSTARTED = 0x0UL;
 
-  while(!twiBaseAddress->EVENTS_LASTTX && !twiBaseAddress->EVENTS_ERROR);
+  while(!twiBaseAddress->EVENTS_LASTTX && !twiBaseAddress->EVENTS_ERROR) {
+    static int counter = 0;
+    counter++;
+    if (counter > 5000) {
+        i2c_fix();
+        return;
+    }
+  }
   twiBaseAddress->EVENTS_LASTTX = 0x0UL;
 
   if (stop || twiBaseAddress->EVENTS_ERROR) {
