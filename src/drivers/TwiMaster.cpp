@@ -12,7 +12,8 @@ TwiMaster::TwiMaster(const Modules module, const Parameters& params) : module{mo
   mutex = xSemaphoreCreateBinary();
 }
 
-NRF_TWIM_Type* twimaddress;
+static NRF_TWIM_Type* twimaddress;
+
 void TwiMaster::Init() {
   NRF_GPIO->PIN_CNF[params.pinScl] = ((uint32_t)GPIO_PIN_CNF_DIR_Input      << GPIO_PIN_CNF_DIR_Pos)
                                      | ((uint32_t)GPIO_PIN_CNF_INPUT_Connect    << GPIO_PIN_CNF_INPUT_Pos)
@@ -113,6 +114,7 @@ void TwiMaster::Read(uint8_t deviceAddress, uint8_t *buffer, size_t size, bool s
 
   while(!twiBaseAddress->EVENTS_LASTRX && !twiBaseAddress->EVENTS_ERROR) {
     static int counter = 0;
+    counter = 0;
     counter++;
     if (counter > 5000) {
         i2c_fix();
@@ -150,6 +152,7 @@ void TwiMaster::Write(uint8_t deviceAddress, const uint8_t *data, size_t size, b
 
   while(!twiBaseAddress->EVENTS_LASTTX && !twiBaseAddress->EVENTS_ERROR) {
     static int counter = 0;
+    counter = 0;
     counter++;
     if (counter > 5000) {
         i2c_fix();
