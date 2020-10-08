@@ -84,7 +84,7 @@ bool InfiniRun::Refresh() {
     }
   
     //checks if it is in the position of the paddle	  
-    if(pos_y >= (y_1 + 12) && pos_y <= (y_2 - 12)){ 
+    if(pos_y >= (y_1 + 16) && pos_y <= (y_2 - 8)){ 
       if(pos_x >= 0 && pos_x < 4){    
           lv_obj_set_pos(img_src_2, 5, pos_y);
           dx *= -1;   
@@ -118,7 +118,7 @@ bool InfiniRun::OnTouchEvent(uint16_t x, uint16_t y) {
  
   lv_obj_set_pos(img_src_1, 0, y - 30);		// sets the center paddle pos. (30px offset) with the the y_coordinate of the finger and defaults the x_coordinate to 0
   y_1 = y - 30;					// refreshes the upper extreme of the paddle
-  y_2 = y + 30;					// refreshes the upper extreme of the paddle
+  y_2 = y + 30;					// refreshes the lower extreme of the paddle
   
  // lvgl.SetFullRefresh(Components::LittleVgl::FullRefreshDirections::None);
  // lvgl.FlushDisplay(&area, b);
